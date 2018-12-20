@@ -45,33 +45,27 @@ export default class RestClient {
       return this._simulateDelay()
         .then(() => fetchPromise())
           .then(response => 
-            { 
-              if(response.ok){
-                return response.json();
-              } else {
-                const statusCode = response.status;
-                const data = response.json();
-  
-                return Promise.all([statusCode, data]).then(res => ({
-                  status: res[0], ...res[1]
-                }));
-              }
-            });
+          { 
+            console.log(response);
+            const statusCode = response.status;
+            const data = response.json();
+            return Promise.all([statusCode, data]).then(res => ({
+              status: res[0], ...res[1]
+            }));
+            }
+          );
     } else {
       return fetchPromise()        
         .then(response => 
           { 
-            if(response.ok){
-              return response.json();
-            } else {
-              const statusCode = response.status;
-              const data = response.json();
-
-              return Promise.all([statusCode, data]).then(res => ({
-                status: res[0], ...res[1]
-              }));
+            console.log(response);
+            const statusCode = response.status;
+            const data = response.json();
+            return Promise.all([statusCode, data]).then(res => ({
+              status: res[0], ...res[1]
+            }));
             }
-          });
+          );
     }
   }
 
