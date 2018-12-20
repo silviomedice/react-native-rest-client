@@ -46,7 +46,6 @@ export default class RestClient {
         .then(() => fetchPromise())
           .then(response => 
           { 
-            console.log(response);
             const statusCode = response.status;
             const data = response.json();
             return Promise.all([statusCode, data]).then(res => ({
@@ -58,7 +57,6 @@ export default class RestClient {
       return fetchPromise()        
         .then(response => 
           { 
-            console.log(response);
             const statusCode = response.status;
             const data = response.json();
             return Promise.all([statusCode, data]).then(res => ({
