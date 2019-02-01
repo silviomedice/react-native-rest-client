@@ -48,7 +48,7 @@ export default class RestClient {
           { 
             const statusCode = response.status;
             let data = {};
-            if(response.ok && response.statusText == undefined){
+            if(response.ok && response._bodyInit == ''){
               data = {};
             } else {
               data = response.json();
@@ -56,14 +56,14 @@ export default class RestClient {
             return Promise.all([statusCode, data]).then(res => ({
               status: res[0], ...res[1]
             }));
+            }
           );
     } else {
       return fetchPromise()        
-        .then(response => 
-          { 
+        .then(response => {
             const statusCode = response.status;
             let data = {};
-            if(response.ok && response.statusText == undefined){
+            if(response.ok && response._bodyInit == ''){
               data = {};
             } else {
               data = response.json();
@@ -72,7 +72,7 @@ export default class RestClient {
               status: res[0], ...res[1]
             }));
             }
-          );
+          )
     }
   }
 
