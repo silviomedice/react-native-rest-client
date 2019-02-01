@@ -47,18 +47,27 @@ export default class RestClient {
           .then(response => 
           { 
             const statusCode = response.status;
-            const data = response.json();
+            let data = {};
+            if(response.ok && response.statusText == undefined){
+              data = {};
+            } else {
+              data = response.json();
+            }
             return Promise.all([statusCode, data]).then(res => ({
               status: res[0], ...res[1]
             }));
-            }
           );
     } else {
       return fetchPromise()        
         .then(response => 
           { 
             const statusCode = response.status;
-            const data = response.json();
+            let data = {};
+            if(response.ok && response.statusText == undefined){
+              data = {};
+            } else {
+              data = response.json();
+            }
             return Promise.all([statusCode, data]).then(res => ({
               status: res[0], ...res[1]
             }));
